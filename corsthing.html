@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> CORS demo</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script>
+
+        // Create a request variable and assign a new XMLHttpRequest object to it.
+            var request = new XMLHttpRequest()
+            
+            request.withCredentials = false;
+            var url_string = 'https://api.domainsdb.info/v1/domains/search?domain=facebook&zone=com';
+
+            // Open a new connection, using the GET request on the URL endpoint
+            request.open('GET',url_string , true);
+            request.setRequestHeader("Access-Control-Allow-Origin", "*");
+            request.send();
+
+        request.onload = function() {
+            // Begin accessing JSON data here
+            //console.log(this.response);
+            var data = JSON.parse(this.response)
+            var textnode = document.createTextNode(JSON.stringify(data));
+            document.getElementById("root").appendChild(textnode);
+            console.log(data);
+            for(i=0;i<data.length;i++){
+                //console.log(data[i].flag);
+            }
+        }
+    </script>
+</body>
+
+</html>

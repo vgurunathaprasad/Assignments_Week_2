@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Open Weather API demo</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+
+    <script>
+
+        // Create a request variable and assign a new XMLHttpRequest object to it.
+            var request = new XMLHttpRequest()
+            var url_string = 'https://api.openweathermap.org/data/2.5/weather?q=vellore&appid=d282da8e2d9dab725a4430c5e3460cd1';
+
+            // Open a new connection, using the GET request on the URL endpoint
+            request.open('GET',url_string , true) 
+            request.send();
+
+        request.onload = function() {
+            // Begin accessing JSON data here
+            //console.log(this.response);
+            var data = JSON.parse(this.response)
+            var textnode = document.createTextNode(JSON.stringify(data));
+            document.getElementById("root").appendChild(textnode);
+            console.log(data);
+            for(i=0;i<data.length;i++){
+                //console.log(data[i].flag);
+            }
+        }
+    </script>
+</body>
+
+</html>
